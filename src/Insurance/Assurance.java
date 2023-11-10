@@ -11,19 +11,18 @@ package Insurance;
 public abstract class Assurance {
     private int _policy;
     private String _name;
-    private float _premium;
-    private double _commission;
+    private double _premium;
+    private String _plan;
     private double _coverage;
     
-    public Assurance(int policy, String name, float commision) {
+    public Assurance(int policy, String name, double premium, String plan) {
         _policy = policy;
         _name = name;
         _premium = 0;
-        _commission = commision;
+        _plan = plan;
         _coverage = 0;
     }
     
-    public abstract void calculatePremium();
     
     public abstract void calculateCoverage();
 
@@ -58,7 +57,7 @@ public abstract class Assurance {
     /**
      * @return the _premium
      */
-    public float getPremium() {
+    public double getPremium() {
         return _premium;
     }
 
@@ -67,20 +66,6 @@ public abstract class Assurance {
      */
     public void setPremium(float _premium) {
         this._premium = _premium;
-    }
-
-    /**
-     * @return the _commission
-     */
-    public double getCommission() {
-        return _commission;
-    }
-
-    /**
-     * @param _commission the _commission to set
-     */
-    public void setCommission(double _commission) {
-        this._commission = _commission;
     }
 
     /**
@@ -95,5 +80,19 @@ public abstract class Assurance {
      */
     public void setCoverage(double _coverage) {
         this._coverage = _coverage;
+    }
+
+    /**
+     * @return the _plan
+     */
+    public String getPlan() {
+        return _plan;
+    }
+
+    /**
+     * @param _plan the _plan to set
+     */
+    public void setPlan(String _plan) {
+        this._plan = _plan;
     }
 }

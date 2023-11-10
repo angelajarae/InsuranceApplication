@@ -12,8 +12,7 @@ import javax.swing.JOptionPane;
  * @angela
  */
 public class InsuranceFrame extends javax.swing.JFrame {
-    private Vector _assurances = new Vector();
-    private Assurance _insurance;
+    private Assurance[] _assurances=new Assurance[50];
     
     public InsuranceFrame() {
         initComponents();
@@ -32,12 +31,14 @@ public class InsuranceFrame extends javax.swing.JFrame {
         jPanelNorth = new javax.swing.JPanel();
         jRadioButtonHousing = new javax.swing.JRadioButton();
         jRadioButtonMedicate = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelPolicy = new javax.swing.JLabel();
+        jLabelName = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldPolicy = new javax.swing.JTextField();
-        jTextFieldCommision = new javax.swing.JTextField();
+        jTextFieldPremium = new javax.swing.JTextField();
         jTextFieldName = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldPlan = new javax.swing.JTextField();
         jPanelCenter = new javax.swing.JPanel();
         jPanelHousing = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -47,13 +48,14 @@ public class InsuranceFrame extends javax.swing.JFrame {
         jTextFieldValueLand = new javax.swing.JTextField();
         jTextFieldPercentage = new javax.swing.JTextField();
         jPanelMedicate = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelAge = new javax.swing.JLabel();
+        jLabelHealth = new javax.swing.JLabel();
         jTextFieldAge = new javax.swing.JTextField();
-        jComboBoxPremium = new javax.swing.JComboBox<>();
+        jTextFieldHealth = new javax.swing.JTextField();
         jPanelSouth = new javax.swing.JPanel();
         jButtonAdd = new javax.swing.JButton();
-        jButtonSummary = new javax.swing.JButton();
+        jButtonShow = new javax.swing.JButton();
+        jButtonSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Insurance Application");
@@ -75,13 +77,13 @@ public class InsuranceFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Policy");
+        jLabelPolicy.setText("Policy");
 
-        jLabel2.setText("Name");
+        jLabelName.setText("Name");
 
-        jLabel3.setText("Commision");
+        jLabel3.setText("Premium");
 
-        jTextFieldCommision.setText("0.15");
+        jLabel1.setText("Plan");
 
         javax.swing.GroupLayout jPanelNorthLayout = new javax.swing.GroupLayout(jPanelNorth);
         jPanelNorth.setLayout(jPanelNorthLayout);
@@ -90,16 +92,12 @@ public class InsuranceFrame extends javax.swing.JFrame {
             .addGroup(jPanelNorthLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanelNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelNorthLayout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                        .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelNorthLayout.createSequentialGroup()
                         .addGroup(jPanelNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelNorthLayout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelPolicy, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(42, 42, 42)
-                                .addComponent(jTextFieldPolicy))
+                                .addComponent(jTextFieldPolicy, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                             .addComponent(jRadioButtonHousing, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22)
                         .addGroup(jPanelNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +107,18 @@ public class InsuranceFrame extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNorthLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldCommision, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jTextFieldPremium, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanelNorthLayout.createSequentialGroup()
+                        .addGroup(jPanelNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelNorthLayout.createSequentialGroup()
+                                .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNorthLayout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)))
+                        .addGroup(jPanelNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                            .addComponent(jTextFieldPlan))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanelNorthLayout.setVerticalGroup(
@@ -119,20 +128,21 @@ public class InsuranceFrame extends javax.swing.JFrame {
                 .addGroup(jPanelNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButtonHousing)
                     .addComponent(jRadioButtonMedicate))
+                .addGap(29, 29, 29)
+                .addGroup(jPanelNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPolicy)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldPolicy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPremium, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanelNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelName)
+                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanelNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextFieldPolicy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldCommision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanelNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                    .addComponent(jTextFieldPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
-
-        getContentPane().add(jPanelNorth, java.awt.BorderLayout.NORTH);
 
         jPanelCenter.setLayout(new java.awt.CardLayout());
 
@@ -180,11 +190,9 @@ public class InsuranceFrame extends javax.swing.JFrame {
 
         jPanelCenter.add(jPanelHousing, "Housing");
 
-        jLabel4.setText("Age");
+        jLabelAge.setText("Age");
 
-        jLabel5.setText("Premium");
-
-        jComboBoxPremium.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "20", "40", "60", "80", "100" }));
+        jLabelHealth.setText("Health");
 
         javax.swing.GroupLayout jPanelMedicateLayout = new javax.swing.GroupLayout(jPanelMedicate);
         jPanelMedicate.setLayout(jPanelMedicateLayout);
@@ -192,31 +200,28 @@ public class InsuranceFrame extends javax.swing.JFrame {
             jPanelMedicateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMedicateLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel4)
-                .addGap(54, 54, 54)
-                .addComponent(jTextFieldAge, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelAge)
                 .addGap(52, 52, 52)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxPremium, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addComponent(jTextFieldAge, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabelHealth)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldHealth, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanelMedicateLayout.setVerticalGroup(
             jPanelMedicateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMedicateLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(jPanelMedicateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jComboBoxPremium, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelMedicateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(jTextFieldAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabelAge)
+                    .addComponent(jTextFieldAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelHealth)
+                    .addComponent(jTextFieldHealth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
 
         jPanelCenter.add(jPanelMedicate, "Medicate");
-
-        getContentPane().add(jPanelCenter, java.awt.BorderLayout.CENTER);
 
         jButtonAdd.setText("Add");
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -225,10 +230,17 @@ public class InsuranceFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonSummary.setText("Summary");
-        jButtonSummary.addActionListener(new java.awt.event.ActionListener() {
+        jButtonShow.setText("Show");
+        jButtonShow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSummaryActionPerformed(evt);
+                jButtonShowActionPerformed(evt);
+            }
+        });
+
+        jButtonSearch.setText("Search");
+        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchActionPerformed(evt);
             }
         });
 
@@ -237,11 +249,13 @@ public class InsuranceFrame extends javax.swing.JFrame {
         jPanelSouthLayout.setHorizontalGroup(
             jPanelSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSouthLayout.createSequentialGroup()
-                .addContainerGap(113, Short.MAX_VALUE)
+                .addGap(65, 65, 65)
                 .addComponent(jButtonAdd)
-                .addGap(92, 92, 92)
-                .addComponent(jButtonSummary)
-                .addGap(112, 112, 112))
+                .addGap(49, 49, 49)
+                .addComponent(jButtonShow)
+                .addGap(50, 50, 50)
+                .addComponent(jButtonSearch)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanelSouthLayout.setVerticalGroup(
             jPanelSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,11 +263,28 @@ public class InsuranceFrame extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(jPanelSouthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAdd)
-                    .addComponent(jButtonSummary))
+                    .addComponent(jButtonShow)
+                    .addComponent(jButtonSearch))
                 .addGap(21, 21, 21))
         );
 
-        getContentPane().add(jPanelSouth, java.awt.BorderLayout.SOUTH);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelNorth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelCenter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelSouth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelNorth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelCenter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanelSouth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -265,58 +296,132 @@ public class InsuranceFrame extends javax.swing.JFrame {
     private void jRadioButtonMedicateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMedicateActionPerformed
         ((CardLayout)jPanelCenter.getLayout()).show(jPanelCenter,"Medicate");
     }//GEN-LAST:event_jRadioButtonMedicateActionPerformed
-
+    
+    private void save(int policy, String name, double premium, String plan, int pos){
+        if(jRadioButtonHousing.isSelected()){
+            String location=jTextFieldLocation.getText();
+            double valueLand=Double.parseDouble(jTextFieldValueLand.getText());
+            double percentage=Double.parseDouble(jTextFieldPercentage.getText());
+            _assurances[pos]=new AssuranceHousing(policy, name, premium, plan, location, valueLand, percentage);
+        }
+        else{
+            int age=Integer.parseInt(jTextFieldAge.getText());
+            String health=jTextFieldHealth.getText();
+            _assurances[pos]=new AssuranceMedicate(policy, name, premium, plan, age,health);
+        }
+        _assurances[pos].calculateCoverage();
+    }
+    
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         int policy = Integer.parseInt( jTextFieldPolicy.getText() );
         String name = jTextFieldName.getText();
-        float commission = Float.parseFloat( jTextFieldCommision.getText() );
+        double premium = Double.parseDouble( jTextFieldPremium.getText() );
+        String plan =jTextFieldPlan.getText();
         
-        if( jRadioButtonHousing.isSelected() ){
-            String location = jTextFieldLocation.getText();
-            double valueLand = Double.parseDouble( jTextFieldValueLand.getText() );
-            float percentage = Float.parseFloat( jTextFieldPercentage.getText() );
-            _insurance = new AssuranceHousing(policy, name, commission, location, valueLand, percentage );
+        int pos=policy % _assurances.length;
+        
+        if(_assurances[pos].getPolicy()==policy){
+            JOptionPane.showMessageDialog(this, "Ya se encuentra ingresado.");
+        }
+        else if(_assurances[pos].equals(null)){
+            save(policy,name,premium,plan,pos);
+            JOptionPane.showMessageDialog(this, "Se agregó correctamente.");
         }
         else{
-            float premium = Float.parseFloat(jComboBoxPremium.getSelectedItem().toString() );
-            int age = Integer.parseInt( jTextFieldAge.getText() );
-            _insurance = new AssuranceMedicate(policy, name, commission, premium, age);
+            int fil=pos+1;
+            
+            while(_assurances[fil].getPolicy()!=policy&&!_assurances[fil].equals(null)&&fil!=pos){
+                fil=fil+1;
+                
+                if(fil==_assurances.length-1){
+                    fil=0;
+                }
+                
+            }
+            
+            if(_assurances[pos].getPolicy()==policy){
+                JOptionPane.showMessageDialog(this, "Ya se encuentra ingresado.");
+            }
+            else if(_assurances[fil].equals(null)){
+                save(policy,name,premium,plan,pos);
+                JOptionPane.showMessageDialog(this, "Se agregó correctamente.");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Espacio agotado para agregar más elementos.");
+            }
         }
-        
-        _insurance.calculatePremium();
-        _insurance.calculateCoverage();
-        _assurances.addElement( _insurance );
     }//GEN-LAST:event_jButtonAddActionPerformed
 
-    private void jButtonSummaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSummaryActionPerformed
-        double summary = 0, sumValueLand = 0, averageValueland = 0;
-        int sumAge = 0, countMedicate = 0, countHousing = 0, averageAge = 0;
+    private void jButtonShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowActionPerformed
+        StringBuilder cadena=new StringBuilder();
         
-        for(Object insurance : _assurances ) {
-            summary = summary + ((Assurance)insurance).getCoverage();
-            
-            if( insurance instanceof AssuranceMedicate ){
-                countMedicate++;
-                sumAge = sumAge + ((AssuranceMedicate)insurance).getAge();
-            }
-            if( insurance instanceof AssuranceHousing){
-                countHousing++;
-                sumValueLand = sumValueLand +((AssuranceHousing)insurance).getValueLand();
+        for(int i=0;i<_assurances.length;i++){
+            if(_assurances[i]!=null){
+                cadena.append("\nPoliza: ").append(_assurances[i].getPolicy());
+                cadena.append("\nNombre: ").append(_assurances[i].getName());
+                cadena.append("\nPrima: ").append(_assurances[i].getPremium());
+                cadena.append("\nPlan: ").append(_assurances[i].getPlan());
+                
+                if(_assurances[i] instanceof AssuranceHousing){
+                    cadena.append("\nubicacion: ").append(((AssuranceHousing)_assurances[i]).getLocation());
+                    cadena.append("\nPrecio: ").append(((AssuranceHousing)_assurances[i]).getValueLand());
+                    cadena.append("\nPorcentaje: ").append(((AssuranceHousing)_assurances[i]).getPercentage());
+                }
+                else{
+                    cadena.append("\nEdad: ").append(((AssuranceMedicate)_assurances[i]).getAge());
+                    cadena.append("\nSalud: ").append(((AssuranceMedicate)_assurances[i]).getHealth());
+                }
+                cadena.append("\nCobertura: ").append(_assurances[i].getCoverage());
             }
         }
-        
-        if (countMedicate != 0)
-            averageAge = sumAge/countMedicate;
-        if( countHousing != 0)
-            averageValueland = sumValueLand / countHousing;
-        
-        JOptionPane.showMessageDialog(this,
-            "La cobertura del total de seguros es: "+ summary +
-            "\nLos seguros médicos tienen una edad promedio: " + averageAge +
-            "\nLos seguros de vivienda tienen valor de la vivienda promedio: "+ averageValueland, 
-            "Insurance Application",
-            JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jButtonSummaryActionPerformed
+        JOptionPane.showMessageDialog(this, cadena);
+    }//GEN-LAST:event_jButtonShowActionPerformed
+
+    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
+            int policy = Integer.parseInt( jTextFieldPolicy.getText() );
+            int pos=policy % _assurances.length;
+            boolean isFound=false;
+            
+            if(_assurances[pos].getPolicy()==policy){
+                isFound=true;
+            }
+            else if(_assurances[pos].equals(null)){
+                isFound=false;
+            }
+            else{
+                int fil=pos+1;
+
+                while(_assurances[fil].getPolicy()!=policy&&!_assurances[fil].equals(null)&&fil!=pos){
+                    fil=fil+1;
+
+                    if(fil==_assurances.length-1){
+                        fil=0;
+                    }
+
+                }
+
+                if(_assurances[pos].getPolicy()==policy){
+                    isFound=true;
+                    pos=fil;
+                }
+                else{
+                    isFound=false;
+                }
+            }
+            
+            if(isFound){
+                JOptionPane.showMessageDialog(this,
+                "Poliza: "+ _assurances[pos].getPolicy() +
+                "\nNombre: " + _assurances[pos].getName() +
+                "\nPlan seguro: "+ _assurances[pos].getPlan()+ 
+                "\nCobertura: "+ _assurances[pos].getCoverage(), 
+                "Insurance Application",
+                JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "No se encuentra.");
+            }
+    }//GEN-LAST:event_jButtonSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,16 +461,17 @@ public class InsuranceFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupInsurance;
     private javax.swing.JButton jButtonAdd;
-    private javax.swing.JButton jButtonSummary;
-    private javax.swing.JComboBox<String> jComboBoxPremium;
+    private javax.swing.JButton jButtonSearch;
+    private javax.swing.JButton jButtonShow;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelAge;
+    private javax.swing.JLabel jLabelHealth;
+    private javax.swing.JLabel jLabelName;
+    private javax.swing.JLabel jLabelPolicy;
     private javax.swing.JPanel jPanelCenter;
     private javax.swing.JPanel jPanelHousing;
     private javax.swing.JPanel jPanelMedicate;
@@ -374,11 +480,13 @@ public class InsuranceFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonHousing;
     private javax.swing.JRadioButton jRadioButtonMedicate;
     private javax.swing.JTextField jTextFieldAge;
-    private javax.swing.JTextField jTextFieldCommision;
+    private javax.swing.JTextField jTextFieldHealth;
     private javax.swing.JTextField jTextFieldLocation;
     private javax.swing.JTextField jTextFieldName;
     private javax.swing.JTextField jTextFieldPercentage;
+    private javax.swing.JTextField jTextFieldPlan;
     private javax.swing.JTextField jTextFieldPolicy;
+    private javax.swing.JTextField jTextFieldPremium;
     private javax.swing.JTextField jTextFieldValueLand;
     // End of variables declaration//GEN-END:variables
 }

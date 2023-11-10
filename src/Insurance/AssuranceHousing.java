@@ -11,29 +11,19 @@ package Insurance;
 public class AssuranceHousing extends Assurance{
     private String _location;
     private double _valueLand;
-    private float _percentage;
+    private double _percentage;
     
-    public AssuranceHousing(int policy, String name, float commission, String location, double valueLand, float percentage) {
-        super(policy, name, commission);
+    public AssuranceHousing(int policy, String name, double premium, String plan, String location, double valueLand, double percentage) {
+        super(policy, name, premium, plan);
         _location = location;
         _valueLand = valueLand;
         _percentage = percentage;
     }
    
-    @Override
-    public void calculatePremium() {
-        if( getPercentage() == 100 )
-            setPremium( (float)(getValueLand() * 0.05) );
-        else
-            setPremium( (float)( getValueLand() * ((getPercentage() * 0.05)/100) ));
-    }
     
     @Override
     public void calculateCoverage() {
-        if( getPercentage() == 100 )
-            setCoverage( getValueLand() );
-        else
-            setCoverage( getValueLand() * (getPercentage()/100) );
+        setCoverage( getValueLand() * getPercentage() );
     }
     
     /**
@@ -67,7 +57,7 @@ public class AssuranceHousing extends Assurance{
     /**
      * @return the _percentage
      */
-    public float getPercentage() {
+    public double getPercentage() {
         return _percentage;
     }
 
