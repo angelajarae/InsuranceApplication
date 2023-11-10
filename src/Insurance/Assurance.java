@@ -18,7 +18,7 @@ public abstract class Assurance {
     public Assurance(int policy, String name, double premium, String plan) {
         _policy = policy;
         _name = name;
-        _premium = 0;
+        _premium = premium;
         _plan = plan;
         _coverage = 0;
     }

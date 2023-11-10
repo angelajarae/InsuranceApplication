@@ -318,33 +318,35 @@ public class InsuranceFrame extends javax.swing.JFrame {
         double premium = Double.parseDouble( jTextFieldPremium.getText() );
         String plan =jTextFieldPlan.getText();
         
-        int pos=policy % _assurances.length;
+        int pos=(policy % _assurances.length) +1;
         
-        if(_assurances[pos].getPolicy()==policy){
-            JOptionPane.showMessageDialog(this, "Ya se encuentra ingresado.");
-        }
-        else if(_assurances[pos].equals(null)){
+        if(_assurances[pos]==null){
             save(policy,name,premium,plan,pos);
             JOptionPane.showMessageDialog(this, "Se agregó correctamente.");
+            
+        }
+        else if(_assurances[pos].getPolicy()==policy){
+            JOptionPane.showMessageDialog(this, "Ya se encuentra ingresado.");
         }
         else{
             int fil=pos+1;
             
-            while(_assurances[fil].getPolicy()!=policy&&!_assurances[fil].equals(null)&&fil!=pos){
+            while(_assurances[fil].getPolicy()!=policy&&_assurances[fil]!=null&&fil!=pos){
                 fil=fil+1;
                 
-                if(fil==_assurances.length-1){
-                    fil=0;
+                if(fil==_assurances.length+1){
+                    fil=1;
                 }
                 
             }
             
-            if(_assurances[pos].getPolicy()==policy){
-                JOptionPane.showMessageDialog(this, "Ya se encuentra ingresado.");
-            }
-            else if(_assurances[fil].equals(null)){
+            if(_assurances[fil]==null){
                 save(policy,name,premium,plan,pos);
                 JOptionPane.showMessageDialog(this, "Se agregó correctamente.");
+                
+            }
+            else if(_assurances[fil].getPolicy()==policy){
+                JOptionPane.showMessageDialog(this, "Ya se encuentra ingresado.");
             }
             else{
                 JOptionPane.showMessageDialog(this, "Espacio agotado para agregar más elementos.");
@@ -355,7 +357,7 @@ public class InsuranceFrame extends javax.swing.JFrame {
     private void jButtonShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowActionPerformed
         StringBuilder cadena=new StringBuilder();
         
-        for(int i=0;i<_assurances.length;i++){
+        for(int i=1;i<_assurances.length;i++){
             if(_assurances[i]!=null){
                 cadena.append("\nPoliza: ").append(_assurances[i].getPolicy());
                 cadena.append("\nNombre: ").append(_assurances[i].getName());
@@ -372,6 +374,7 @@ public class InsuranceFrame extends javax.swing.JFrame {
                     cadena.append("\nSalud: ").append(((AssuranceMedicate)_assurances[i]).getHealth());
                 }
                 cadena.append("\nCobertura: ").append(_assurances[i].getCoverage());
+                cadena.append("\n");
             }
         }
         JOptionPane.showMessageDialog(this, cadena);
@@ -379,7 +382,7 @@ public class InsuranceFrame extends javax.swing.JFrame {
 
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
             int policy = Integer.parseInt( jTextFieldPolicy.getText() );
-            int pos=policy % _assurances.length;
+            int pos=policy % _assurances.length +1;
             boolean isFound=false;
             
             if(_assurances[pos].getPolicy()==policy){
@@ -395,7 +398,7 @@ public class InsuranceFrame extends javax.swing.JFrame {
                     fil=fil+1;
 
                     if(fil==_assurances.length-1){
-                        fil=0;
+                        fil=1;
                     }
 
                 }
